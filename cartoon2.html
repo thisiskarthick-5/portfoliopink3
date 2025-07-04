@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Karthick - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#ff0066", secondary: "#1a1a1a" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background-color: #0a0a0a;
+      }
+      .tech-font {
+      font-family: 'Orbitron', sans-serif;
+      }
+      .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0a0a0a;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      }
+      .preloader-content {
+      text-align: center;
+      }
+      .preloader-bar {
+      width: 300px;
+      height: 4px;
+      background-color: rgba(255, 0, 102, 0.3);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      }
+      .preloader-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background-color: #ff0066;
+      transition: width 0.5s ease;
+      }
+      .hero-clip {
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+      }
+      .section-clip {
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 100%, 0 100%);
+      }
+      .tech-border {
+      position: relative;
+      }
+      .tech-border::before, .tech-border::after {
+      content: '';
+      position: absolute;
+      background-color: #ff0066;
+      }
+      .tech-border::before {
+      width: 20px;
+      height: 3px;
+      top: 0;
+      left: 0;
+      }
+      .tech-border::after {
+      width: 3px;
+      height: 20px;
+      top: 0;
+      left: 0;
+      }
+      .skill-card {
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      }
+      .skill-card:hover {
+      transform: translateY(-10px) rotateX(5deg);
+      }
+      .parallax {
+      transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+      }
+      .custom-cursor {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: rgba(255, 0, 102, 0.5);
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, background-color 0.3s;
+      mix-blend-mode: difference;
+      }
+      .custom-cursor.active {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 0, 102, 0.2);
+      }
+      .tech-line {
+      position: relative;
+      overflow: hidden;
+      }
+      .tech-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #ff0066, transparent);
+      animation: tech-line-animation 3s infinite;
+      }
+      @keyframes tech-line-animation {
+      0% { left: -100%; }
+      100% { left: 100%; }
+      }
+      .diagonal-lines {
+      background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 0, 102, 0.1) 10px,
+      rgba(255, 0, 102, 0.1) 15px
+      );
+      }
+      .nav-link {
+      position: relative;
+      overflow: hidden;
+      }
+      .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #ff0066;
+      transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+      width: 100%;
+      }
+      .nav-link.active::after {
+      width: 100%;
+      }
+      .glitch-effect {
+      position: relative;
+      }
+      .glitch-effect::before, .glitch-effect::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+      }
+      .glitch-effect::before {
+      color: #0ff;
+      z-index: -1;
+      animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+      animation-delay: 0.1s;
+      }
+      .glitch-effect::after {
+      color: #f0f;
+      z-index: -2;
+      animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+      animation-delay: 0.2s;
+      }
+      @keyframes glitch {
+      0% {
+      transform: translate(0);
+      }
+      20% {
+      transform: translate(-3px, 3px);
+      }
+      40% {
+      transform: translate(-3px, -3px);
+      }
+      60% {
+      transform: translate(3px, 3px);
+      }
+      80% {
+      transform: translate(3px, -3px);
+      }
+      100% {
+      transform: translate(0);
+      }
+      }
+      .project-card {
+      transition: all 0.3s ease;
+      }
+      .project-card:hover {
+      transform: scale(1.03);
+      }
+      .project-card:hover .project-overlay {
+      opacity: 1;
+      }
+      .project-overlay {
+      background: rgba(255, 0, 102, 0.8);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      }
+      .hexagon {
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      }
+      .tech-button {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      }
+      .tech-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.7s;
+      z-index: -1;
+      }
+      .tech-button:hover::before {
+      left: 100%;
+      }
+      .scroll-down {
+      animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+      }
+      40% {
+      transform: translateY(-20px);
+      }
+      60% {
+      transform: translateY(-10px);
+      }
+      }
+      ::-webkit-scrollbar {
+      width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+      }
+      ::-webkit-scrollbar-thumb {
+      background: #ff0066;
+      border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+      background: #cc0052;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+      <div class="preloader-content">
+        <h1
+          class="tech-font text-5xl font-bold mb-6 text-primary glitch-effect"
+          data-text="KARTHICK"
+        >
+          KARTHICK
+        </h1>
+        <div class="preloader-bar mx-auto mb-4">
+          <div id="preloader-progress" class="preloader-progress"></div>
+        </div>
+        <p class="text-white text-sm">LOADING PORTFOLIO...</p>
+      </div>
+    </div>
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="custom-cursor"></div>
+    <!-- Header -->
+    <header
+      class="fixed top-0 left-0 w-full z-50 bg-black bg-opacity-80 backdrop-blur-md"
+    >
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <a href="#" class="tech-font text-white text-2xl font-bold"
+            >K<span class="text-primary">.</span></a
+          >
+          <nav class="hidden md:flex space-x-8">
+            <a
+              href="#home"
+              class="nav-link text-white hover:text-primary transition-colors duration-300 active"
+              >Home</a
+            >
+            <a
+              href="#about"
+              class="nav-link text-white hover:text-primary transition-colors duration-300"
+              >About</a
+            >
+            <a
+              href="#skills"
+              class="nav-link text-white hover:text-primary transition-colors duration-300"
+              >Skills</a
+            >
+            <a
+              href="#projects"
+              class="nav-link text-white hover:text-primary transition-colors duration-300"
+              >Projects</a
+            >
+            <a
+              href="#contact"
+              class="nav-link text-white hover:text-primary transition-colors duration-300"
+              >Contact</a
+            >
+          </nav>
+          <button
+            id="mobile-menu-button"
+            class="md:hidden text-white focus:outline-none"
+          >
+            <i class="ri-menu-line ri-2x"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="md:hidden hidden bg-black bg-opacity-95 absolute w-full"
+      >
+        <div class="container mx-auto px-6 py-4">
+          <nav class="flex flex-col space-y-4">
+            <a
+              href="#home"
+              class="text-white hover:text-primary transition-colors duration-300"
+              >Home</a
+            >
+            <a
+              href="#about"
+              class="text-white hover:text-primary transition-colors duration-300"
+              >About</a
+            >
+            <a
+              href="#skills"
+              class="text-white hover:text-primary transition-colors duration-300"
+              >Skills</a
+            >
+            <a
+              href="#projects"
+              class="text-white hover:text-primary transition-colors duration-300"
+              >Projects</a
+            >
+            <a
+              href="#contact"
+              class="text-white hover:text-primary transition-colors duration-300"
+              >Contact</a
+            >
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="min-h-screen flex items-center relative overflow-hidden pt-20 hero-clip"
+    >
+      <canvas id="hero-canvas" class="absolute inset-0 w-full h-full"></canvas>
+      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0">
+            <div class="tech-border p-2">
+              <h1
+                class="tech-font text-5xl md:text-7xl font-bold mb-4 text-white"
+              >
+                <span class="block">I'M</span>
+                <span class="text-primary glitch-effect" data-text="KARTHICK"
+                  >KARTHICK</span
+                >
+              </h1>
+            </div>
+            <div class="h-1 w-24 bg-primary mb-6"></div>
+            <h2 class="text-xl md:text-2xl text-white mb-6">
+              BE CSE Student at Jaya Engineering College
+            </h2>
+            <p class="text-gray-300 mb-8 max-w-lg">
+              Passionate developer specializing in web development, UI/UX
+              design, and 3D animations. Creating digital experiences that blend
+              creativity with technical excellence.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#projects"
+                class="tech-button bg-primary hover:bg-primary/90 text-white py-3 px-8 !rounded-button font-medium transition-all duration-300 flex items-center"
+              >
+                View Projects <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+              <a
+                href="#contact"
+                class="tech-button bg-transparent border-2 border-white hover:border-primary text-white hover:text-primary py-3 px-8 !rounded-button font-medium transition-all duration-300"
+              >
+                Contact Me
+              </a>
+            </div>
+          </div>
+          <div class="md:w-1/2 flex justify-center">
+               </div>
+        </div>
+        <div
+          class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-down"
+        >
+          
+        </div>
+      </div>
+      <!-- Decorative Elements -->
+      <div
+        class="absolute top-20 right-10 w-20 h-20 border-t-2 border-r-2 border-primary parallax"
+        data-speed="0.2"
+      ></div>
+      <div
+        class="absolute bottom-20 left-10 w-20 h-20 border-b-2 border-l-2 border-primary parallax"
+        data-speed="0.3"
+      ></div>
+      <div
+        class="absolute top-1/3 left-10 w-3 h-3 bg-primary rounded-full parallax"
+        data-speed="0.15"
+      ></div>
+      <div
+        class="absolute bottom-1/3 right-10 w-3 h-3 bg-primary rounded-full parallax"
+        data-speed="0.25"
+      ></div>
+    </section>
+    <!-- About Section -->
+    <section
+      id="about"
+      class="py-20 bg-gray-50 section-clip relative overflow-hidden"
+    >
+      <div class="diagonal-lines absolute inset-0 opacity-20"></div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0">
+            <img
+              src="https://readdy.ai/api/search-image?query=professional%20young%20Indian%20male%20software%20developer%20working%20on%20multiple%20screens%2C%20modern%20workspace%20with%20programming%20code%20visible%20on%20screens%2C%20tech%20environment%2C%20side%20view%2C%20focused%20expression%2C%20high%20quality%20realistic%20render&width=600&height=600&seq=about1&orientation=squarish"
+              alt="About Karthick"
+              class="w-full max-w-md mx-auto rounded-lg shadow-xl parallax"
+              data-speed="0.05"
+            />
+          </div>
+          <div class="md:w-1/2 md:pl-12">
+            <div class="tech-border p-2 inline-block mb-4">
+              <h2 class="tech-font text-3xl font-bold text-gray-900">
+                ABOUT <span class="text-primary">ME</span>
+              </h2>
+            </div>
+            <div class="h-1 w-16 bg-primary mb-6"></div>
+            <p class="text-gray-700 mb-6">
+              Hello! I'm Karthick, a Computer Science Engineering student at
+              Jaya Engineering College with a passion for creating innovative
+              digital solutions. My journey in technology began with a curiosity
+              about how digital experiences are crafted, leading me to explore
+              various aspects of software development.
+            </p>
+            <p class="text-gray-700 mb-6">
+              I specialize in web development, UI/UX design, and 3D animations,
+              combining technical skills with creative vision to build engaging
+              user experiences. My approach focuses on clean code, intuitive
+              design, and performance optimization.
+            </p>
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">Name:</h3>
+                <p class="text-gray-700">Karthick</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">Education:</h3>
+                <p class="text-gray-700">BE CSE, Jaya Engineering College</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">Email:</h3>
+                <p class="text-gray-700">karthfire@gmail.com</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">Location:</h3>
+                <p class="text-gray-700">Chennai, India</p>
+              </div>
+            </div>
+            <a
+              href="#"
+              class="tech-button bg-primary hover:bg-primary/90 text-white py-3 px-8 !rounded-button font-medium transition-all duration-300 inline-block"
+            >
+              Download CV <i class="ri-download-line ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Decorative Elements -->
+      <div
+        class="absolute top-20 left-10 w-16 h-16 hexagon bg-primary/10 parallax"
+        data-speed="0.2"
+      ></div>
+      <div
+        class="absolute bottom-20 right-10 w-16 h-16 hexagon bg-primary/10 parallax"
+        data-speed="0.3"
+      ></div>
+    </section>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-900 relative overflow-hidden">
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+          <div class="tech-border p-2 inline-block mb-4">
+            <h2 class="tech-font text-3xl font-bold text-white">
+              MY <span class="text-primary">SKILLS</span>
+            </h2>
+          </div>
+          <div class="h-1 w-16 bg-primary mx-auto mb-6"></div>
+          <p class="text-gray-300 max-w-2xl mx-auto">
+            Leveraging a diverse skill set to create innovative digital
+            solutions. Each skill represents my commitment to excellence and
+            continuous learning in the ever-evolving tech landscape.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Web Development -->
+          <div
+            class="skill-card bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-700 hover:border-primary transition-all duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto"
+            >
+              <i class="ri-code-s-slash-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="tech-font text-xl font-bold text-white mb-4 text-center">
+              Web Development
+            </h3>
+            <p class="text-gray-400 text-center mb-6">
+              Creating responsive, performant websites with modern frameworks
+              and clean code practices.
+            </p>
+            <div class="space-y-3">
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">HTML</span>
+                  <span class="text-primary text-sm">90%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 90%"
+                  ></div>
+                </div>
+              </div>
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">CSS</span>
+                  <span class="text-primary text-sm">75%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">dart</span>
+                  <span class="text-primary text-sm">50%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 80%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- UI/UX Design -->
+          <div
+            class="skill-card bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-700 hover:border-primary transition-all duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto"
+            >
+              <i class="ri-layout-4-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="tech-font text-xl font-bold text-white mb-4 text-center">
+              UI/UX Design
+            </h3>
+            <p class="text-gray-400 text-center mb-6">
+              Designing intuitive interfaces and seamless user experiences with
+              a focus on aesthetics and usability.
+            </p>
+            <div class="space-y-3">
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">Figma</span>
+                  <span class="text-primary text-sm">95%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 95%"
+                  ></div>
+                </div>
+              </div>
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">Photoshop</span>
+                  <span class="text-primary text-sm">85%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">Wireframing</span>
+                  <span class="text-primary text-sm">90%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 90%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Programming -->
+          <div
+            class="skill-card bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-700 hover:border-primary transition-all duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto"
+            >
+              <i class="ri-terminal-box-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="tech-font text-xl font-bold text-white mb-4 text-center">
+              Programming
+            </h3>
+            <p class="text-gray-400 text-center mb-6">
+              Building efficient applications with various programming languages
+              and problem-solving techniques.
+            </p>
+            <div class="space-y-3">
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">Python</span>
+                  <span class="text-primary text-sm">90%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 90%"
+                  ></div>
+                </div>
+              </div>
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">C</span>
+                  <span class="text-primary text-sm">85%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">Data Structures</span>
+                  <span class="text-primary text-sm">80%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 80%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Other Skills -->
+          <div
+            class="skill-card bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-700 hover:border-primary transition-all duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto"
+            >
+              <i class="ri-tools-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="tech-font text-xl font-bold text-white mb-4 text-center">
+              Other Skills
+            </h3>
+            <p class="text-gray-400 text-center mb-6">
+              Additional competencies that complement my technical skills and
+              enhance project outcomes.
+            </p>
+            <div class="space-y-3">
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">Git/GitHub</span>
+                  <span class="text-primary text-sm">90%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 90%"
+                  ></div>
+                </div>
+              </div>
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">Responsive Design</span>
+                  <span class="text-primary text-sm">95%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 95%"
+                  ></div>
+                </div>
+              </div>
+              <div class="tech-line">
+                <div class="flex justify-between mb-1">
+                  <span class="text-gray-400 text-sm">Problem Solving</span>
+                  <span class="text-primary text-sm">85%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div
+                    class="h-full bg-primary rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Decorative Elements -->
+      <div
+        class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black to-transparent"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black to-transparent"
+      ></div>
+      <div
+        class="absolute top-1/4 right-10 w-3 h-20 bg-primary/30 parallax"
+        data-speed="0.2"
+      ></div>
+      <div
+        class="absolute bottom-1/4 left-10 w-3 h-20 bg-primary/30 parallax"
+        data-speed="0.3"
+      ></div>
+    </section>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50 relative overflow-hidden">
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+          <div class="tech-border p-2 inline-block mb-4">
+            <h2 class="tech-font text-3xl font-bold text-gray-900">
+              MY <span class="text-primary">PROJECTS</span>
+            </h2>
+          </div>
+          <div class="h-1 w-16 bg-primary mx-auto mb-6"></div>
+          <p class="text-gray-700 max-w-2xl mx-auto">
+            Showcasing a selection of my recent work that demonstrates my
+            technical skills, creative approach, and problem-solving abilities.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project 1 -->
+          <div
+            class="project-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="relative h-60">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20e-commerce%20website%20interface%20with%20product%20listings%2C%20clean%20UI%20design%2C%20shopping%20cart%20functionality%2C%20responsive%20layout%2C%20professional%20web%20design%20showcase&width=600&height=400&seq=proj1&orientation=landscape"
+                alt="E-commerce Website"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="project-overlay absolute inset-0 flex items-center justify-center"
+              >
+                <a
+                  href="#"
+                  class="bg-white text-primary py-2 px-6 !rounded-button font-medium hover:bg-white/90 transition-all duration-300"
+                  >View Project</a
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="tech-font text-xl font-bold text-gray-900 mb-2">
+                E-commerce Platform
+              </h3>
+              <p class="text-gray-700 mb-4">
+                A fully responsive e-commerce website with product filtering,
+                cart functionality, and secure payment integration.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >React</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >Node.js</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >MongoDB</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >Stripe</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Project 2 -->
+          <!-- Project 3 -->
+          <div
+            class="project-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="relative h-60">
+              <img
+                src="https://readdy.ai/api/search-image?query=mobile%20app%20UI%20design%20for%20fitness%20tracking%2C%20clean%20interface%20with%20health%20metrics%2C%20workout%20plans%2C%20progress%20charts%2C%20modern%20mobile%20application%20design&width=600&height=400&seq=proj3&orientation=landscape"
+                alt="Fitness App"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="project-overlay absolute inset-0 flex items-center justify-center"
+              >
+                <a
+                  href="#"
+                  class="bg-white text-primary py-2 px-6 !rounded-button font-medium hover:bg-white/90 transition-all duration-300"
+                  >View Project</a
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="tech-font text-xl font-bold text-gray-900 mb-2">
+                Fitness Tracking App
+              </h3>
+              <p class="text-gray-700 mb-4">
+                A mobile application for tracking workouts, nutrition, and
+                fitness goals with data visualization and progress tracking.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >Firebase</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >Chart.js</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >Figma</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Project 4 -->
+          <div
+            class="project-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="relative h-60">
+              <img
+                src="https://readdy.ai/api/search-image?query=educational%20platform%20interface%20with%20course%20listings%2C%20video%20player%2C%20learning%20progress%20tracking%2C%20modern%20e-learning%20website%20design&width=600&height=400&seq=proj4&orientation=landscape"
+                alt="Learning Platform"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="project-overlay absolute inset-0 flex items-center justify-center"
+              >
+                <a
+                  href="#"
+                  class="bg-white text-primary py-2 px-6 !rounded-button font-medium hover:bg-white/90 transition-all duration-300"
+                  >View Project</a
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="tech-font text-xl font-bold text-gray-900 mb-2">
+                Online Learning Platform
+              </h3>
+              <p class="text-gray-700 mb-4">
+                An educational platform featuring course management, video
+                lessons, quizzes, and progress tracking for students.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >Vue.js</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >Django</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >PostgreSQL</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >AWS</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Project 5 -->
+          <div
+            class="project-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="relative h-60">
+              <img
+                src="https://readdy.ai/api/search-image?query=dashboard%20interface%20with%20data%20visualization%2C%20analytics%20charts%2C%20user%20statistics%2C%20admin%20panel%2C%20modern%20web%20application%20UI%20design&width=600&height=400&seq=proj5&orientation=landscape"
+                alt="Analytics Dashboard"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="project-overlay absolute inset-0 flex items-center justify-center"
+              >
+                <a
+                  href="#"
+                  class="bg-white text-primary py-2 px-6 !rounded-button font-medium hover:bg-white/90 transition-all duration-300"
+                  >View Project</a
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="tech-font text-xl font-bold text-gray-900 mb-2">
+                Analytics Dashboard
+              </h3>
+              <p class="text-gray-700 mb-4">
+                A comprehensive analytics dashboard with real-time data
+                visualization, reporting tools, and user management features.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >React</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >D3.js</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >Express</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >Socket.io</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Project 6 -->
+          <div
+            class="project-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="relative h-60">
+              <img
+                src="https://readdy.ai/api/search-image?query=portfolio%20website%20design%20with%20creative%20layout%2C%20project%20showcases%2C%20modern%20UI%20elements%2C%20professional%20web%20design%20for%20creative%20professionals&width=600&height=400&seq=proj6&orientation=landscape"
+                alt="Portfolio Website"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="project-overlay absolute inset-0 flex items-center justify-center"
+              >
+                <a
+                  href="#"
+                  class="bg-white text-primary py-2 px-6 !rounded-button font-medium hover:bg-white/90 transition-all duration-300"
+                  >View Project</a
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="tech-font text-xl font-bold text-gray-900 mb-2">
+                Creative Portfolio
+              </h3>
+              <p class="text-gray-700 mb-4">
+                A personal portfolio website featuring creative animations,
+                project showcases, and interactive elements for a unique user
+                experience.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >HTML5</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >CSS3</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >JavaScript</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                  >GSAP</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-12">
+          <a
+            href="#"
+            class="tech-button bg-primary hover:bg-primary/90 text-white py-3 px-8 !rounded-button font-medium transition-all duration-300 inline-block"
+          >
+            View All Projects <i class="ri-arrow-right-line ml-2"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Decorative Elements -->
+      <div class="diagonal-lines absolute inset-0 opacity-10"></div>
+      <div
+        class="absolute top-20 right-10 w-20 h-20 border-t-2 border-r-2 border-primary/30 parallax"
+        data-speed="0.2"
+      ></div>
+      <div
+        class="absolute bottom-20 left-10 w-20 h-20 border-b-2 border-l-2 border-primary/30 parallax"
+        data-speed="0.3"
+      ></div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900 relative overflow-hidden">
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+          <div class="tech-border p-2 inline-block mb-4">
+            <h2 class="tech-font text-3xl font-bold text-white">
+              GET IN <span class="text-primary">TOUCH</span>
+            </h2>
+          </div>
+          <div class="h-1 w-16 bg-primary mx-auto mb-6"></div>
+          <p class="text-gray-300 max-w-2xl mx-auto">
+            Have a project in mind or want to discuss potential collaborations?
+            I'd love to hear from you! Feel free to reach out using any of the
+            contact methods below.
+          </p>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-12">
+          <div class="lg:w-1/2">
+            <form class="bg-gray-800 p-8 rounded-lg shadow-lg">
+              <div class="mb-6">
+                <label for="name" class="block text-gray-300 mb-2"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full bg-gray-700 border-none text-white px-4 py-3 rounded focus:ring-2 focus:ring-primary outline-none"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="email" class="block text-gray-300 mb-2"
+                  >Your Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full bg-gray-700 border-none text-white px-4 py-3 rounded focus:ring-2 focus:ring-primary outline-none"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="subject" class="block text-gray-300 mb-2"
+                  >Subject</label
+                >
+                <input
+                  type="text"
+                  id="subject"
+                  class="w-full bg-gray-700 border-none text-white px-4 py-3 rounded focus:ring-2 focus:ring-primary outline-none"
+                  placeholder="Enter subject"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="message" class="block text-gray-300 mb-2"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="5"
+                  class="w-full bg-gray-700 border-none text-white px-4 py-3 rounded focus:ring-2 focus:ring-primary outline-none resize-none"
+                  placeholder="Enter your message"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="tech-button bg-primary hover:bg-primary/90 text-white py-3 px-8 !rounded-button font-medium transition-all duration-300 w-full"
+              >
+                Send Message <i class="ri-send-plane-line ml-2"></i>
+              </button>
+            </form>
+          </div>
+          <div class="lg:w-1/2">
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg h-full">
+              <h3 class="tech-font text-2xl font-bold text-white mb-6">
+                Contact Information
+              </h3>
+              <div class="space-y-6">
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-map-pin-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-medium mb-1">Location</h4>
+                    <p class="text-gray-400">thiruninravur , Chennai, Tamil Nadu, India</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-mail-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-medium mb-1">Email</h4>
+                    <a
+                      href="mailto:karthick@example.com"
+                      class="text-gray-400 hover:text-primary transition-colors duration-300"
+                      >karthfire@gmail.com</a
+                    >
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-phone-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-medium mb-1">Phone</h4>
+                    <a
+                      href="tel:+918610795811"
+                      class="text-gray-400 hover:text-primary transition-colors duration-300"
+                      >+91 86107 95811</a
+                    >
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                  >
+                    <i class="ri-global-line ri-lg text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-medium mb-1">Website</h4>
+                    <a
+                      href="https://thisiskarthick-5.github.io/portfoliopink1/"
+                      class="text-gray-400 hover:text-primary transition-colors duration-300"
+                      >www.karthick.dev</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8">
+                <h4 class="text-white font-medium mb-4">Follow Me</h4>
+                <div class="flex space-x-4">
+                  <a
+                    href="https://github.com/thisiskarthick-5"
+                    class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
+                  >
+                    <i class="ri-github-fill ri-lg text-white"></i
+                    >
+                  </a>
+                  <a
+                    href="www.linkedin.com/in/karthick-j-a6443a312"
+                    class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
+                  >
+                    <i class="ri-linkedin-fill ri-lg text-white"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
+                  >
+                    <i class="ri-twitter-fill ri-lg text-white"></i>
+                  </a>
+                  <a
+                    href="https://www.instagram.com/_itz_pab_x?igsh=aXBibTdjdmpqd3A5"
+                    class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
+                  >
+                    <i class="ri-instagram-fill ri-lg text-white"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
+                  >
+                    <i class="ri-behance-fill ri-lg text-white"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Decorative Elements -->
+      <div
+        class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black to-transparent"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black to-transparent"
+      ></div>
+      <div
+        class="absolute top-1/4 left-10 w-3 h-20 bg-primary/30 parallax"
+        data-speed="0.2"
+      ></div>
+      <div
+        class="absolute bottom-1/4 right-10 w-3 h-20 bg-primary/30 parallax"
+        data-speed="0.3"
+      ></div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <a href="#" class="tech-font text-white text-2xl font-bold"
+              >K<span class="text-primary">.</span></a
+            >
+          </div>
+          <div class="text-center md:text-left mb-4 md:mb-0">
+            <p class="text-gray-400">
+              &copy; 2025 Karthick. All rights reserved.
+            </p>
+          </div>
+          <div>
+            <a
+              href="#home"
+              class="tech-button bg-primary/10 hover:bg-primary/20 text-white py-2 px-4 !rounded-button font-medium transition-all duration-300 inline-flex items-center"
+            >
+              <i class="ri-arrow-up-line mr-2"></i> Back to Top
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script id="preloader-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const preloader = document.getElementById("preloader");
+        const preloaderProgress = document.getElementById("preloader-progress");
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += Math.random() * 10;
+          if (progress > 100) progress = 100;
+          preloaderProgress.style.width = `${progress}%`;
+          if (progress === 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+              preloader.style.opacity = "0";
+              setTimeout(() => {
+                preloader.style.display = "none";
+              }, 500);
+            }, 500);
+          }
+        }, 200);
+      });
+    </script>
+    <script id="mobile-menu-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+        });
+        const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+        mobileMenuLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            mobileMenu.classList.add("hidden");
+          });
+        });
+      });
+    </script>
+    <script id="parallax-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const parallaxElements = document.querySelectorAll(".parallax");
+        window.addEventListener("mousemove", function (e) {
+          const mouseX = e.clientX / window.innerWidth - 0.5;
+          const mouseY = e.clientY / window.innerHeight - 0.5;
+          parallaxElements.forEach((element) => {
+            const speed = element.getAttribute("data-speed") || 0.1;
+            const x = mouseX * 100 * speed;
+            const y = mouseY * 100 * speed;
+            element.style.transform = `translate(${x}px, ${y}px)`;
+          });
+        });
+      });
+    </script>
+    <script id="custom-cursor-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const cursor = document.getElementById("custom-cursor");
+        document.addEventListener("mousemove", function (e) {
+          cursor.style.left = e.clientX + "px";
+          cursor.style.top = e.clientY + "px";
+        });
+        document.addEventListener("mousedown", function () {
+          cursor.classList.add("active");
+        });
+        document.addEventListener("mouseup", function () {
+          cursor.classList.remove("active");
+        });
+        const links = document.querySelectorAll("a, button");
+        links.forEach((link) => {
+          link.addEventListener("mouseenter", function () {
+            cursor.classList.add("active");
+          });
+          link.addEventListener("mouseleave", function () {
+            cursor.classList.remove("active");
+          });
+        });
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.1/three.min.js"></script>
+    <script id="hero-3d-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const canvas = document.getElementById("hero-canvas");
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000,
+        );
+        const renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha: true,
+          antialias: true,
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+        const geometry = new THREE.IcosahedronGeometry(2, 1);
+        const material = new THREE.MeshPhongMaterial({
+          color: 0xff0066,
+          wireframe: true,
+          wireframeLinewidth: 2,
+          transparent: true,
+          opacity: 0.8,
+        });
+        const sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2000;
+        const posArray = new Float32Array(particlesCount * 3);
+        for (let i = 0; i < particlesCount * 3; i++) {
+          posArray[i] = (Math.random() - 0.5) * 15;
+        }
+        particlesGeometry.setAttribute(
+          "position",
+          new THREE.BufferAttribute(posArray, 3),
+        );
+        const particlesMaterial = new THREE.PointsMaterial({
+          size: 0.02,
+          color: 0xff0066,
+          transparent: true,
+          opacity: 0.8,
+        });
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(5, 5, 5);
+        scene.add(light);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        camera.position.z = 5;
+        function onWindowResize() {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        window.addEventListener("resize", onWindowResize);
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener("mousemove", (event) => {
+          mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+          mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+        function animate() {
+          requestAnimationFrame(animate);
+          sphere.rotation.x += 0.002;
+          sphere.rotation.y += 0.003;
+          particlesMesh.rotation.x += 0.001;
+          particlesMesh.rotation.y += 0.001;
+          sphere.rotation.x += mouseY * 0.01;
+          sphere.rotation.y += mouseX * 0.01;
+          particlesMesh.rotation.x += mouseY * 0.005;
+          particlesMesh.rotation.y += mouseX * 0.005;
+          renderer.render(scene, camera);
+        }
+        animate();
+      });
+    </script>
+    <script id="smooth-scroll-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: "smooth",
+              });
+              // Update active link
+              document.querySelectorAll(".nav-link").forEach((navLink) => {
+                navLink.classList.remove("active");
+              });
+              this.classList.add("active");
+            }
+          });
+        });
+        // Update active link on scroll
+        window.addEventListener("scroll", function () {
+          const scrollPosition = window.scrollY;
+          document.querySelectorAll("section").forEach((section) => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute("id");
+            if (
+              scrollPosition >= sectionTop &&
+              scrollPosition < sectionTop + sectionHeight
+            ) {
+              document.querySelectorAll(".nav-link").forEach((navLink) => {
+                navLink.classList.remove("active");
+                if (navLink.getAttribute("href") === "#" + sectionId) {
+                  navLink.classList.add("active");
+                }
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
