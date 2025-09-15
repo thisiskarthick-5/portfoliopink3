@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Resume</title>
+  <style>
+    :root{
+      --bg-dark:#0b1220; /* deep dark */
+      --pink:#ff4aa6;    /* vivid pink */
+      --card:#0f1724;
+      --muted:#9aa4b2;
+      --radius:12px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-dark),#07101a);color:#e6eef6}
+    .container{max-width:900px;margin:40px auto;padding:24px}
+
+    /* Header / title */
+    .header{background:var(--card);padding:28px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(2,6,23,0.6);display:flex;gap:20px;align-items:center}
+    .title-block{background:linear-gradient(90deg, rgba(255,74,166,0.12), rgba(255,74,166,0.02));padding:18px;border-radius:10px;flex:1}
+    h1{margin:0;font-size:28px;color:var(--pink);letter-spacing:0.4px}
+    p.sub{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+    /* Resume card */
+    .resume-card{margin-top:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:12px}
+    .resume-img{width:100%;height:auto;border-radius:8px;display:block;object-fit:cover}
+
+    /* Controls */
+    .controls{display:flex;gap:10px;margin-left:auto}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:var(--pink);cursor:pointer;font-weight:600}
+
+    /* Responsive */
+    @media (max-width:640px){
+      .header{flex-direction:column;align-items:flex-start}
+      h1{font-size:22px}
+    }
+
+    /* Print-friendly */
+    @media print{
+      body{background:white;color:black}
+      .header, .controls{display:none}
+      .container{max-width:100%;margin:0;padding:0}
+      .resume-card{border:none;background:transparent;padding:0}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title-block">
+        <h1 id="page-title">Your Name — Resume</h1>
+        <p class="sub">Web Developer | UIUX Developer / chennai • karthfire@gmail.com• +91-86107 95811</p>
+      </div>
+      <div class="controls" aria-hidden="true">
+        <button class="btn" onclick="downloadImage()">Download Image</button>
+        <button class="btn" onclick="window.print()">Print</button>
+      </div>
+    </div>
+
+    <div class="resume-card">
+      <!-- Replace 'resume.jpg' with your actual resume image filename or a data URI -->
+      <img id="resumeImg" class="resume-img" src="resume.jpg" alt="Resume image - replace resume.jpg with your file">
+    </div>
+  </div>
+
+  <script>
+    // Small helper: download the resume image file shown on the page
+    function downloadImage(){
+      const img = document.getElementById('resumeImg');
+      const url = img.src;
+      if(!url){ alert('No image source found. Make sure resume.jpg is in the same folder or set the img src.'); return; }
+      const a = document.createElement('a');
+      a.href = url;
+      // Suggest a sensible name
+      a.download = 'resume-image';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    // Quick: let user change title by clicking it
+    document.getElementById('page-title').addEventListener('click', ()=>{
+      const newTitle = prompt('Edit title', document.getElementById('page-title').innerText);
+      if(newTitle) document.getElementById('page-title').innerText = newTitle;
+    });
+  </script>
+</body>
+</html>
